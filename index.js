@@ -21,7 +21,6 @@ const userPositionPrompt = {
         "Manager",
         "Engineer",
         "Intern",
-        "Add another employee",
         "Finished"
     ]
 };
@@ -74,10 +73,10 @@ const addEmployee = () => {
 
     // If yes, return starting prompts, else writeFile function
     .then((addAnswers) => {
-        if (addAnswers.moreEmployees === "yes") {
+        if (addAnswers.moreEmployees === "Yes") {
             return startUserPrompts()
         }
-        
+
         else {
             return writeFile() 
         }
@@ -192,7 +191,7 @@ const internPrompt = () => {
         }, 
         {
             type: 'input',
-            name: 'schoolName',
+            name: 'school',
             message: "Name of school: ",
         },
     ])
@@ -201,7 +200,7 @@ const internPrompt = () => {
 
         // Store internAnswers into internInfo
         let intern = new Intern 
-        (internAnswers.name, internAnswers.id, internAnswers.email, internAnswers.schoolName)
+        (internAnswers.name, internAnswers.id, internAnswers.email, internAnswers.school)
         internInfoArray.push(intern)
 
         addEmployee()
@@ -246,6 +245,23 @@ const writeFile = () => {
                 <p class="id">ID: ${engineerInfoArray[i].id}</p>
                 <p class="email">Email: <a href="mailto:${engineerInfoArray[i].email}">${engineerInfoArray[i].email}</a></p>
                 <p class="github">Github: <a href="https://github.com/${engineerInfoArray[i].github}">${engineerInfoArray[i].github}</a></p>
+            </div>
+            </div>
+        `
+    }
+
+    // Intern profiles
+    for (let i = 0; i < internInfoArray.length; i++) {
+        internProfile = `
+            <div class="profile">
+            <div class="profile-header">
+                <h3>Intern</h3>
+                <h4>${internInfoArray[i].name}</h4>
+            </div>
+            <div class="profile-content">
+                <p class="id">ID: ${internInfoArray[i].id}</p>
+                <p class="email">Email: <a href="mailto:${internInfoArray[i].email}">${internInfoArray[i].email}</a></p>
+                <p class="school">School Name: ${internInfoArray[i].school}</p>
             </div>
             </div>
         `
