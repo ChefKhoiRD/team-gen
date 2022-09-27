@@ -1,11 +1,5 @@
 # Team profile generator
 
-## Table of Contents
-- [User Story](#user-story)
-- [Acceptance Criteria](#acceptance-criteria)
-- [Screenshot](#screenshot)
-- [Walkthrough Video](#walkthrough-video)
-
 ## Objective
 
 ```
@@ -44,10 +38,23 @@ WHEN I decide to finish building my team
 THEN I exit the application, and the HTML is generated
 ```
 
+## Instructions
+
+```
+1. Run npm test to make sure all the models are working
+2. Run node index to launch the command line application
+3. Select which postition the employee is at
+4. Enter information based on the prompt question (Name, Id, Email, etc)
+5. Select "No" or "Finished" to write HTML file
+6. Navigate to dist folder
+7. Right click index.html and select "Open in Default Browser"
+8. Enjoy your employee's profiles
+```
+
 ## Screenshot
 ![Team Generator HTML Webpage Screenshot](./assets/Screenshot_1.png)
 
 </br>
 
 ## Walkthrough Video
-![Walkthrough Video](./assets/team%20profile%20generator.gif)
+![Walkthrough Video](./assets/teamprofilegen.gif)
