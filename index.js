@@ -296,10 +296,12 @@ const writeFile = () => {
     
     // Use fs to generate HTML file
     fs.writeFile('./dist/index.html', pageHTML, (err) => {
-        if (err) {
-            console.log(err)
-        }
+        if (err) throw err
     })
 };
 
-startUserPrompts();   
+const startApp = () => {
+    startUserPrompts() 
+}
+ 
+startApp();
