@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: rgb(255, 72, 72);
+    color: white;
+    font-size: 50px;
+    text-align: center;
+}
+
+.profile {
+    justify-content: center;
+    background-color: rgb(219, 219, 219);
+    width: 10%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px;
+    color:rgba(255, 255, 255, 0.781);
+}
+
+.profile-header {
+    background-color: rgb(30, 108, 226);
+    color: white;
+}
+
+.profile-content {
+    background-color: rgb(241, 241, 241);
+    color: black;
+    border-color: white;
+}
+
+.container {
+    margin: 100px auto;
+    justify-content: space-evenly;
+    display: flex;
+    
+}
