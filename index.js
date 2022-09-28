@@ -5,12 +5,17 @@ const fs = require("fs");
 // Team profiles
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
-const Intern = require('./lib/Intern'); 
+const Intern = require('./lib/Intern');
 
 // Arrays of stored data
 let managerInfoArray = [];
-let engineerInfoArray = [];
+let engineerInfoArray = [];   
 let internInfoArray = [];
+
+// Profiles
+let managerProfile = "";
+let engineerProfile = "";
+let internProfile = ""; 
 
 // User prompt questions
 const userPositionPrompt = {
@@ -115,11 +120,25 @@ const managerPrompt = () => {
     ])
 
     .then((managerAnswers) => {
-
         // Return manager profile
-        let manager = new Manager 
-        (managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.officeNum)
+        let manager = new Manager (managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.officeNum)
         managerInfoArray.push(manager)
+
+        for (let i = 0; i < managerInfoArray.length; i++) {
+            managerProfile = `
+            <div class="profile">
+            <div class="profile-header">
+                <h3>Manager</h3>
+                <h4>${managerInfoArray[i].name}</h4>
+            </div>
+            <div class="profile-content">
+                <p class="id">ID: ${managerInfoArray[i].id}</p>
+                <p class="email">Email: <a href="mailto:${managerInfoArray[i].email}">${managerInfoArray[i].email}</a></p>
+                <p class="office">Office # : ${managerInfoArray[i].officeNum}</p>
+            </div>
+            </div>
+            `
+        }
 
         addEmployee();
     })
@@ -162,6 +181,23 @@ const engineerPrompt = () => {
         (engineerAnswers.name, engineerAnswers.id, engineerAnswers.email, engineerAnswers.github)
         engineerInfoArray.push(engineer)   
 
+        // Engineer profiles
+        for (let i = 0; i < engineerInfoArray.length; i++) {
+            engineerProfile = `
+                <div class="profile">
+                <div class="profile-header">
+                    <h3>Engineer</h3>
+                    <h4>${engineerInfoArray[i].name}</h4>
+                </div>
+                <div class="profile-content">
+                    <p class="id">ID: ${engineerInfoArray[i].id}</p>
+                    <p class="email">Email: <a href="mailto:${engineerInfoArray[i].email}">${engineerInfoArray[i].email}</a></p>
+                    <p class="github">Github: <a href="https://github.com/${engineerInfoArray[i].github}">${engineerInfoArray[i].github}</a></p>
+                </div>
+                </div>
+            `
+        }
+
         addEmployee();
     })
 
@@ -203,6 +239,23 @@ const internPrompt = () => {
         (internAnswers.name, internAnswers.id, internAnswers.email, internAnswers.school)
         internInfoArray.push(intern)
 
+        // Intern profiles
+        for (let i = 0; i < internInfoArray.length; i++) {
+            internProfile = `
+                <div class="profile">
+                <div class="profile-header">
+                    <h3>Intern</h3>
+                    <h4>${internInfoArray[i].name}</h4>
+                </div>
+                <div class="profile-content">
+                    <p class="id">ID: ${internInfoArray[i].id}</p>
+                    <p class="email">Email: <a href="mailto:${internInfoArray[i].email}">${internInfoArray[i].email}</a></p>
+                    <p class="school">School Name: ${internInfoArray[i].school}</p>
+                </div>
+                </div>
+            `
+        }
+
         addEmployee()
     })
     
@@ -211,62 +264,8 @@ const internPrompt = () => {
     })
 };
 
+
 const writeFile = () => {
-    let managerProfile = "";
-    let engineerProfile = "";
-    let internProfile = "";
-
-    // Manager profiles
-    for (let i = 0; i < managerInfoArray.length; i++) {
-        managerProfile = `
-            <div class="profile">
-            <div class="profile-header">
-                <h3>Manager</h3>
-                <h4>${managerInfoArray[i].name}</h4>
-            </div>
-            <div class="profile-content">
-                <p class="id">ID: ${managerInfoArray[i].id}</p>
-                <p class="email">Email: <a href="mailto:${managerInfoArray[i].email}">${managerInfoArray[i].email}</a></p>
-                <p class="office">Office # : ${managerInfoArray[i].officeNum}</p>
-            </div>
-            </div>
-        `
-    }
-
-    // Engineer profiles
-    for (let i = 0; i < engineerInfoArray.length; i++) {
-        engineerProfile = `
-            <div class="profile">
-            <div class="profile-header">
-                <h3>Engineer</h3>
-                <h4>${engineerInfoArray[i].name}</h4>
-            </div>
-            <div class="profile-content">
-                <p class="id">ID: ${engineerInfoArray[i].id}</p>
-                <p class="email">Email: <a href="mailto:${engineerInfoArray[i].email}">${engineerInfoArray[i].email}</a></p>
-                <p class="github">Github: <a href="https://github.com/${engineerInfoArray[i].github}">${engineerInfoArray[i].github}</a></p>
-            </div>
-            </div>
-        `
-    }
-
-    // Intern profiles
-    for (let i = 0; i < internInfoArray.length; i++) {
-        internProfile = `
-            <div class="profile">
-            <div class="profile-header">
-                <h3>Intern</h3>
-                <h4>${internInfoArray[i].name}</h4>
-            </div>
-            <div class="profile-content">
-                <p class="id">ID: ${internInfoArray[i].id}</p>
-                <p class="email">Email: <a href="mailto:${internInfoArray[i].email}">${internInfoArray[i].email}</a></p>
-                <p class="school">School Name: ${internInfoArray[i].school}</p>
-            </div>
-            </div>
-        `
-    }
-
     // Html template
     let pageHTML = `
         <!DOCTYPE html>
@@ -293,15 +292,15 @@ const writeFile = () => {
         </body>
         </html>
     `
-    
+
     // Use fs to generate HTML file
     fs.writeFile('./dist/index.html', pageHTML, (err) => {
-        if (err) throw err
+    if (err) throw err
     })
 };
 
 const startApp = () => {
-    startUserPrompts() 
+    startUserPrompts()
 }
  
 startApp();
